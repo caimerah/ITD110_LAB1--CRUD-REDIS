@@ -7,7 +7,7 @@ This project is a Student Management System that provides CRUD (Create, Read, Up
 
 - **Authentication**: Simple role-based authentication (Admin/User)
 
- -**Student Management**: Add, update, delete, and search student records
+ - **Student Management**: Add, update, delete, and search student records
 
 - **CSV Upload**: Bulk upload student data via CSV (Currently, an error occurs when uploading a CSV file. However, the system can read and display raw CSV data in a table format.)
 
