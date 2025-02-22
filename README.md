@@ -3,6 +3,8 @@
 
 This project is a Student Data Management that provides **CRUD** _(Create, Read, Update, Delete)_ functionality using **Node.js**, **Express**, **Redis**, and a **React.js** frontend. It allows admins to manage student records and users (students) to check their status.
 
+![image](https://github.com/user-attachments/assets/527b16c7-6373-4320-9ca7-3781343c56bb)
+
 # Features
 
 - **Authentication**: Simple role-based authentication (Admin/User)
