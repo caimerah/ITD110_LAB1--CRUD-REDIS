@@ -1,0 +1,504 @@
+/* Full-Screen Fixed UI with Scrollable Table */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f7fc;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.app-container {
+  width: 100%;
+  height: 100vh;
+  padding: 40px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  overflow-y: auto; /* Enables scrolling inside app */
+  padding-bottom: 50px; /* Space for footer */
+  justify-content: space-between;
+  max-width: 1800px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  text-align: center;
+  color: transparent;
+  font-size: 36px;
+  font-weight: 700;
+  position: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 20px 0;
+  z-index: 10;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(45deg, #001f3f, #003366);
+  background-clip: text;
+  text-fill-color: transparent;
+  letter-spacing: 1px;
+  animation: titleAnimation 1s ease-in-out;
+}
+
+/* Hover effect */
+h1:hover {
+  background-image: linear-gradient(45deg, #003366, #001f3f);
+  background-clip: text;
+  text-fill-color: transparent;
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animation for title appearance */
+@keyframes titleAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h2 {
+  text-align: center;
+  color: transparent;
+  font-size: 24px; /* Reduced font size */
+  font-weight: 700; /* Keeps it bold */
+  text-transform: uppercase; /* Makes text uppercase */
+  position: relative; /* Fixed flex issue */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 15px 0; /* Slightly reduced padding */
+  z-index: 10;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08); /* Smoother box shadow */
+  background-image: linear-gradient(45deg, #001f3f, #003366);
+  background-clip: text;
+  text-fill-color: transparent;
+  letter-spacing: 1px;
+  animation: titleAnimation 1s ease-in-out;
+  border-radius: 8px; /* Smooth corners */
+}
+
+/* Hover effect */
+h2:hover {
+  background-image: linear-gradient(45deg, #003366, #001f3f);
+  background-clip: text;
+  text-fill-color: transparent;
+  transform: scale(1.03); /* Slightly reduced hover effect */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animation for title appearance */
+@keyframes ctitleAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+button {
+  background-color: #001f3f;
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(145deg, #003366, #001f3f);  /* Gradient for depth */
+
+}
+
+button:hover {
+  background-color: #003366;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #001f3f, #001f3f);
+  transform: scale(1.05);
+}
+
+/* Flexbox container for side-by-side layout */
+.actions-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adds small space between button & input */
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+/* Add Student Button */
+.action-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  white-space: nowrap; /* Prevents button text from wrapping */
+}
+
+.action-button:hover {
+  background-color: #357abd;
+  transform: scale(1.05);
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  justify-content: center; /* Center the search bar horizontally */
+  align-items: center; /* Center the search bar vertically (if needed) */
+  margin: bottom 40px;
+}
+
+.search-input {
+  width: 300px; /* Increase width for a bigger input */
+  padding: 10px; /* Increase padding for a bigger input height */
+  padding-right: 30px; /* Make space for the X mark */
+  font-size: 16px; /* Slightly larger font for readability */
+  border-radius: 25px; /* Rounded corners for a smoother look */
+  border: 1px solid #ccc; /* Soft border */
+  transition: all 0.3s ease; /* Smooth transition for focus/hover effects */
+}
+
+.search-input:focus {
+  outline: none; /* Remove default outline */
+  border-color: #4a90e2; /* Highlight border color on focus */
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); /* Add a subtle shadow for focus */
+}
+
+.clear-search {
+  position: absolute;
+  right: 10px; /* Adjust the position of the X inside the input */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full height */
+  gap: 20px;
+}
+
+.title-box {
+  background: #F5F5DC;
+  color: #4a90e2;
+  padding: 20px 40px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(6, 56, 112, 0.2);
+}
+
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.custom-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #001f3f, #001f3f);
+  color: white;
+  transition: 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.custom-button:hover {
+  background: linear-gradient(135deg, #001f3f, #001f3f);
+  transform: scale(1.05);
+}
+
+.custom-button:active {
+  transform: scale(0.98);
+}
+
+
+
+
+.table-container {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 1800px;
+  height: calc(100vh - 130px);
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: white;
+  position: relative;
+}
+
+.table-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f4f7fc;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-sizing: border-box;
+  table-layout: auto; /* Ensures columns stay aligned */
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  background: #001f3f;
+  z-index: 5;
+  display: table-header-group; /* Ensures headers align with columns */
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+
+}
+
+/* Customize column widths for 10 columns */
+table th:nth-child(1), table td:nth-child(1) { width: 8%; } /* First column (Wider) */
+table th:nth-child(2), table td:nth-child(2) { width: 11%; } /* Smaller */
+table th:nth-child(3), table td:nth-child(3) { width: 5%; }  /* Smaller */
+table th:nth-child(4), table td:nth-child(4) { width: 5%; } /* Medium */
+table th:nth-child(5), table td:nth-child(5) { width: 6%; } /* Smaller */
+table th:nth-child(6), table td:nth-child(6) { width: 15%; }  /* Smaller */
+table th:nth-child(7), table td:nth-child(7) { width: 16%; } /* Medium */
+table th:nth-child(8), table td:nth-child(8) { width: 10%; }  /* Smallest */
+table th:nth-child(9), table td:nth-child(9) { width: 5%; } /* Medium */
+table th:nth-child(10), table td:nth-child(10) { width: 12%}/* Last column (Widest) */
+
+table th {
+  background-color: #36454F;
+  color: white;
+}
+
+tbody {
+  display: block;
+  max-height: 65vh;
+  overflow-y: auto;
+  width: 100%;
+}
+
+thead, tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* Ensures consistent column sizing */
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #dde7f5;
+  transition: background 0.3s ease-in-out;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+nav button {
+  padding: 10px 15px;
+  border: #001f3f;
+  background: #001f3f;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+nav button:hover {
+  background: #5d6ae0;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  z-index: 1001; /* Ensure popup content appears above the background */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.popup-content input {
+  display: block;
+  margin: 10px auto;
+  padding: 8px;
+  width: 80%;
+}
+
+.popup-content button {
+  margin: 10px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.modal form {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 420px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.modal form h2 {
+  margin-bottom: 15px;
+  color: #001f3f;
+  font-weight: bold;
+}
+
+.modal form input,
+.modal form select,
+.modal form button {
+  width: calc(100% - 20px);
+  margin-bottom: 12px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.modal form button {
+  background-color: #001f3f;
+  color: white;
+  border: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.modal form button:hover {
+  background-color: #003366;
+}
+
+.modal form button[type='button'] {
+  background-color: #6c757d;
+}
+
+.modal form button[type='button']:hover {
+  background-color: #5a6268;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 20px;
+  }
+  table th, table td {
+    padding: 6px;
+    font-size: 12px;
+  }
+  button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+}
+
+.user-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+
+@media (max-width: 480px) {
+  .app-container {
+    width: 90%;
+    padding: 15px;
+  }
+  table th, table td {
+    padding: 6px;
+    font-size: 10px;
+  }
+  button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  color: #666;
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+}
